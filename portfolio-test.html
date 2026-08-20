@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerrard Hung 洪士傑 — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #EDE7D8;
+    --paper-raised: #F5F1E5;
+    --ink: #2B2620;
+    --ink-dim: #7A7263;
+    --wine: #6E2530;
+    --wine-soft: #8a3a44;
+    --gold: #A9873F;
+    --line: rgba(43,38,32,0.16);
+    --line-strong: rgba(43,38,32,0.30);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'EB Garamond', serif;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:'';
+    position:fixed; inset:0; pointer-events:none; z-index:1;
+    background-image:radial-gradient(circle at 1px 1px, rgba(43,38,32,0.045) 1px, transparent 0);
+    background-size:3px 3px;
+    opacity:0.6;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .display{font-family:'Fraunces',serif;}
+  .smallcaps{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+  }
+
+  /* laurel svg reused */
+  .laurel{ width:14px; height:14px; flex-shrink:0; opacity:0.8; }
+
+  /* ===== Nav ===== */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 6vw;
+    background:linear-gradient(var(--paper) 60%, transparent);
+  }
+  nav .logo{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:500;
+    letter-spacing:0.01em; font-size:19px; color:var(--ink);
+    text-decoration:none;
+  }
+  nav ul{list-style:none; display:flex; gap:38px;}
+  nav a{
+    color:var(--ink); text-decoration:none;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+    padding-bottom:3px; border-bottom:1px solid transparent;
+    transition:border-color .25s, color .25s;
+  }
+  nav a:hover, nav a:focus-visible{ border-color:var(--wine); color:var(--wine); }
+
+  /* ===== Hero ===== */
+  .hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:0 6vw;
+    position:relative;
+  }
+  .hero .rule-top{
+    display:flex; align-items:center; gap:16px;
+    margin-bottom:34px;
+  }
+  .hero .rule-top .ln{ height:1px; flex:1; background:var(--line-strong); }
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:500; font-style:italic;
+    font-size:clamp(46px, 8.6vw, 128px);
+    line-height:0.98;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 .cn{
+    display:block;
+    font-family:'Fraunces',serif; font-style:normal; font-weight:300;
+    font-size:0.34em; letter-spacing:0.5em;
+    margin-top:14px; color:var(--ink-dim);
+  }
+  .hero .tagline{
+    margin-top:34px;
+    font-family:'EB Garamond',serif; font-style:italic;
+    font-size:clamp(17px,2vw,22px);
+    color:var(--ink);
+    max-width:600px; line-height:1.7;
+    border-left:2px solid var(--wine);
+    padding-left:22px;
+  }
+  .hero .role-strip{
+    margin-top:52px;
+    display:flex; gap:0; flex-wrap:wrap;
+  }
+  .hero .role-strip span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--ink-dim);
+    padding:0 20px; border-right:1px solid var(--line-strong);
+  }
+  .hero .role-strip span:first-child{ padding-left:0; }
+  .hero .role-strip span:last-child{ border-right:none; }
+  .scroll-cue{
+    position:absolute; bottom:40px; left:6vw;
+    display:flex; align-items:center; gap:10px;
+  }
+  .scroll-cue .dot{
+    width:6px; height:6px; border-radius:50%; background:var(--wine);
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:.35;} 50%{opacity:1;} }
+
+  /* ===== Section shell ===== */
+  section{ padding:130px 6vw; position:relative; z-index:2; }
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    padding-bottom:22px; margin-bottom:64px;
+    border-bottom:1px solid var(--line-strong);
+    flex-wrap:wrap; gap:12px;
+  }
+  .section-head .eyebrow{ display:flex; align-items:center; gap:10px; }
+  .section-head h2{
+    font-family:'Fraunces',serif; font-weight:500; font-style:italic;
+    font-size:clamp(30px,4vw,46px);
+  }
+
+  /* ===== Works — editorial plates ===== */
+  .work{
+    display:grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap:64px;
+    padding:60px 0;
+    border-bottom:1px solid var(--line);
+    align-items:start;
+  }
+  .work:last-child{ border-bottom:none; }
+  .work .plate-num{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:300;
+    font-size:15px; color:var(--wine); margin-bottom:16px;
+    display:block;
+  }
+  .work .frame{
+    position:relative;
+    border:1px solid var(--line-strong);
+    padding:10px;
+    background:var(--paper-raised);
+  }
+  .work .frame .screen{
+    aspect-ratio:16/9; width:100%; background:#0e0e0e;
+  }
+  .work .frame .screen iframe{ width:100%; height:100%; border:0; display:block; }
+  .work .frame .caption{
+    display:flex; justify-content:space-between;
+    padding:10px 4px 2px;
+    font-family:'IBM Plex Mono',monospace; font-size:10px;
+    letter-spacing:0.08em; color:var(--ink-dim); text-transform:uppercase;
+  }
+  .work .meta{ display:flex; flex-direction:column; gap:16px; }
+  .work h3{
+    font-family:'Fraunces',serif; font-weight:600; font-style:italic;
+    font-size:clamp(28px,3.2vw,42px);
+  }
+  .work p.desc{ color:var(--ink-dim); line-height:1.8; max-width:52ch; font-size:16.5px; }
+  .work .awards{ list-style:none; display:flex; flex-direction:column; gap:11px; margin-top:8px; }
+  .work .awards li{
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:14px; color:var(--ink); line-height:1.55;
+  }
+
+  @media (max-width:860px){
+    .work{ grid-template-columns:1fr; gap:26px; }
+  }
+
+  /* ===== About ===== */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 300px 1fr;
+    gap:74px; align-items:start;
+  }
+  .about-grid .portrait{
+    width:100%; aspect-ratio:3/3.6;
+    border:1px solid var(--gold);
+    padding:9px;
+    position:relative;
+  }
+  .about-grid .portrait img{
+    width:100%; height:100%; object-fit:cover;
+    filter:sepia(0.18) contrast(1.02);
+  }
+  .about-grid .bio p{
+    color:var(--ink-dim); line-height:1.95; margin-bottom:22px;
+    max-width:66ch; font-size:16.5px;
+  }
+  .about-grid .bio p.lead{
+    color:var(--ink); font-size:20px; line-height:1.85;
+    font-style:italic; font-family:'Fraunces',serif; font-weight:400;
+  }
+  .cv-link{
+    display:inline-flex; align-items:center; gap:10px; margin-top:6px;
+    font-family:'IBM Plex Mono',monospace; font-size:11px;
+    letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--wine); text-decoration:none;
+    border-bottom:1px solid var(--wine); padding-bottom:4px;
+  }
+  @media (max-width:820px){
+    .about-grid{ grid-template-columns:1fr; }
+    .about-grid .portrait{ max-width:240px; }
+  }
+
+  /* ===== Contact ===== */
+  .contact h2.big{
+    font-family:'Fraunces',serif; font-weight:500; font-style:italic;
+    font-size:clamp(38px,7vw,88px); line-height:1.05; margin-bottom:50px;
+  }
+  .contact-list{ display:flex; flex-direction:column; }
+  .contact-row{
+    display:flex; align-items:center; gap:24px;
+    padding:20px 0; border-top:1px solid var(--line-strong);
+    flex-wrap:wrap;
+  }
+  .contact-row .k{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-dim); width:110px; flex-shrink:0; }
+  .contact-row a, .contact-row span.v{ font-family:'EB Garamond',serif; font-size:19px; color:var(--ink); text-decoration:none; }
+  .contact-row a:hover{ color:var(--wine); }
+
+  footer{
+    padding:36px 6vw 46px; position:relative; z-index:2;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink-dim);
+    border-top:1px solid var(--line-strong); flex-wrap:wrap; gap:10px;
+  }
+
+  .badge-test{
+    position:fixed; bottom:18px; right:18px; z-index:60;
+    background:var(--wine); color:#F5F1E5;
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.06em;
+    padding:8px 12px; box-shadow:0 4px 14px rgba(0,0,0,.2);
+  }
+</style>
+</head>
+<body>
+
+<div class="badge-test mono">TEST VERSION — 待補真實作品圖片</div>
+
+<nav>
+  <a href="#top" class="logo">Demoart Studio</a>
+  <ul>
+    <li><a href="#works">Œuvres</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div id="top" class="hero">
+  <div class="rule-top"><span class="ln"></span><span class="smallcaps">Portfolio MMXXVI</span><span class="ln"></span></div>
+  <h1>Gerrard Hung<span class="cn">洪 士 傑</span></h1>
+  <p class="tagline">動態影像設計師與動畫師。作品曾獲紅點傳達設計獎、台北電影節，以及好萊塢學生國際影展最佳外語動畫片。</p>
+  <div class="role-strip">
+    <span>Animation</span>
+    <span>Motion Graphic Design</span>
+    <span>3D Design Education</span>
+  </div>
+  <div class="scroll-cue"><span class="dot"></span><span class="smallcaps">Scroll to explore</span></div>
+</div>
+
+<section id="works">
+  <div class="section-head">
+    <div class="eyebrow"><span class="smallcaps">Chapter One</span></div>
+    <h2>Œuvres Choisies</h2>
+  </div>
+
+  <div class="work">
+    <div class="frame">
+      <div class="screen">
+        <iframe src="https://www.youtube.com/embed/SPmp0XbfnaY" title="WUXIA" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="caption"><span>16:9 · Animation</span><span>2018</span></div>
+    </div>
+    <div class="meta">
+      <span class="plate-num">Plate I</span>
+      <h3>WUXIA</h3>
+      <p class="desc">短篇動畫作品，於國際金短片獎中獲得肯定，展現敘事節奏與動態語言的掌握。</p>
+      <ul class="awards">
+        <li><svg class="laurel" viewBox="0 0 24 24" fill="none" stroke="#A9873F" stroke-width="1.4"><path d="M12 3c-3 4-3 9 0 18M12 3c3 4 3 9 0 18M6 8c1 3 1 6 0 9M18 8c-1 3-1 6 0 9"/></svg>2018 International Golden Short Film Awards — Golden Short Film</li>
+        <li><svg class="laurel" viewBox="0 0 24 24" fill="none" stroke="#A9873F" stroke-width="1.4"><path d="M12 3c-3 4-3 9 0 18M12 3c3 4 3 9 0 18M6 8c1 3 1 6 0 9M18 8c-1 3-1 6 0 9"/></svg>2018 International Golden Short Film Awards — Best Animation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="work">
+    <div class="frame">
+      <div class="screen">
+        <iframe src="https://www.youtube.com/embed/QIq7ScXAMr8" title="Watch" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="caption"><span>16:9 · Animation</span><span>2013</span></div>
+    </div>
+    <div class="meta">
+      <span class="plate-num">Plate II</span>
+      <h3>Watch</h3>
+      <p class="desc">代表作，橫跨台灣、美國、韓國多個影展的肯定，是奠定個人動畫語彙的重要作品。</p>
+      <ul class="awards">
+        <li><svg class="laurel" viewBox="0 0 24 24" fill="none" stroke="#6E2530" stroke-width="1.4"><path d="M12 3c-3 4-3 9 0 18M12 3c3 4 3 9 0 18M6 8c1 3 1 6 0 9M18 8c-1 3-1 6 0 9"/></svg>2014 Red Dot Award: Communication Design Award — Winner</li>
+        <li><svg class="laurel" viewBox="0 0 24 24" fill="none" stroke="#A9873F" stroke-width="1.4"><path d="M12 3c-3 4-3 9 0 18M12 3c3 4 3 9 0 18M6 8c1 3 1 6 0 9M18 8c-1 3-1 6 0 9"/></svg>31st Busan International Short Film Festival — Official Selection</li>
+        <li><svg class="laurel" viewBox="0 0 24 24" fill="none" stroke="#A9873F" stroke-width="1.4"><path d="M12 3c-3 4-3 9 0 18M12 3c3 4 3 9 0 18M6 8c1 3 1 6 0 9M18 8c-1 3-1 6 0 9"/></svg>2013 International Student Film Festival Hollywood — Best Foreign Language Animation</li>
+        <li><svg class="laurel" viewBox="0 0 24 24" fill="none" stroke="#A9873F" stroke-width="1.4"><path d="M12 3c-3 4-3 9 0 18M12 3c3 4 3 9 0 18M6 8c1 3 1 6 0 9M18 8c-1 3-1 6 0 9"/></svg>2013 Taipei Film Festival — Official Selection</li>
+        <li><svg class="laurel" viewBox="0 0 24 24" fill="none" stroke="#A9873F" stroke-width="1.4"><path d="M12 3c-3 4-3 9 0 18M12 3c3 4 3 9 0 18M6 8c1 3 1 6 0 9M18 8c-1 3-1 6 0 9"/></svg>2013 Apalachicola Riverfront Film Festival — Best Animation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="work">
+    <div class="frame">
+      <div class="screen">
+        <iframe src="https://www.youtube.com/embed/oC32xxix7mo" title="Horrible" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="caption"><span>16:9 · Animation</span><span>2012</span></div>
+    </div>
+    <div class="meta">
+      <span class="plate-num">Plate III</span>
+      <h3>Horrible</h3>
+      <p class="desc">入選多個國際兒童影展與動畫影展，以獨特的視覺語彙探索題材的黑色幽默。</p>
+      <ul class="awards">
+        <li><svg class="laurel" viewBox="0 0 24 24" fill="none" stroke="#A9873F" stroke-width="1.4"><path d="M12 3c-3 4-3 9 0 18M12 3c3 4 3 9 0 18M6 8c1 3 1 6 0 9M18 8c-1 3-1 6 0 9"/></svg>2013 Melbourne International Animation Festival — Best of the Next</li>
+        <li><svg class="laurel" viewBox="0 0 24 24" fill="none" stroke="#A9873F" stroke-width="1.4"><path d="M12 3c-3 4-3 9 0 18M12 3c3 4 3 9 0 18M6 8c1 3 1 6 0 9M18 8c-1 3-1 6 0 9"/></svg>2013 Children's Film Festival Seattle — Official Selection</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-head">
+    <div class="eyebrow"><span class="smallcaps">Chapter Two</span></div>
+    <h2>À propos</h2>
+  </div>
+  <div class="about-grid">
+    <div class="portrait">
+      <img src="https://static.wixstatic.com/media/8c2e9e_9d2d2ae2d83748a8b2ceb63b01c0e5a0~mv2_d_3150_2100_s_2.jpg" alt="洪士傑 Gerrard Hung">
+    </div>
+    <div class="bio">
+      <p class="lead">"Hi, I'm Gerrard. I'm an animator and motion graphic designer. Unexpectedly, my career path led me to academia, where I became an Assistant Professor."</p>
+      <p>洪士傑，專長為動態影像設計、2D、3D動畫，曾以《WATCH》動畫影片獲得紅點傳達設計獎、台北電影節，以及好萊塢學生國際影展的最佳外語動畫片殊榮。《HORRIBLE》動畫片曾入圍澳洲墨爾本國際動畫影展、西雅圖兒童影展等。</p>
+      <p>目前身兼創作者與教育者雙重身份，將動畫與3D設計的實務經驗帶入課堂，持續探索文化素養、空間能力與數位典藏等跨領域教學研究方向。</p>
+      <a class="cv-link" href="https://drive.google.com/file/d/1Gnef8in34EnelYEOJhewYmyNLOtRv9bL/view?usp=sharing" target="_blank" rel="noopener">Curriculum Vitae ↗</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-head">
+    <div class="eyebrow"><span class="smallcaps">Chapter Three</span></div>
+    <h2>Contact</h2>
+  </div>
+  <div class="contact">
+    <h2 class="big">On reste<br>en contact.</h2>
+    <div class="contact-list">
+      <div class="contact-row">
+        <span class="k mono">Email</span>
+        <a href="mailto:kiwi2234@hotmail.com">kiwi2234@hotmail.com</a>
+      </div>
+      <div class="contact-row">
+        <span class="k mono">Line</span>
+        <span class="v">gerrard</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© MMXXVI Demoart Studio</span>
+  <span>Design · Motion · Art</span>
+</footer>
+
+</body>
+</html>
